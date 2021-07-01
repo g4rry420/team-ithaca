@@ -272,7 +272,7 @@ export default function AuthNavbar(): JSX.Element {
   useEffect(() => {
     getUnreadNotifications().then((data) => {
       if (data.error) {
-        updateSnackBarMessage(data.error.message);
+        updateSnackBarMessage(data.error);
       } else if (data.success) {
         if (data.notifications?.length) {
           setNotifications(data.notifications);

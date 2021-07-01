@@ -40,7 +40,7 @@ export const getUnreadNotifications = async (): Promise<NotificationApiData> => 
   return await fetch(`${API}/notification/unread`, fetchOptions)
     .then((res) => res.json())
     .catch(() => ({
-      error: { message: 'Unable to connect to server. Please try again' },
+      error: 'Unable to connect to server. Please try again',
     }));
 };
 

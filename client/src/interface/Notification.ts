@@ -18,6 +18,6 @@ export interface Notification {
 
 export interface NotificationApiData {
   notifications?: Notification[];
-  error?: { message: string };
+  error?: string;
   success?: string;
 }
