@@ -20,7 +20,7 @@ const DemoUser: FC<Props> = ({ submit }) => {
     const email = 'test@user.com';
     const password = 'test1234';
     login(email, password).then((data) => {
-      console.log("DATA ", data);
+      console.log('DATA ', data);
       if (data.error) {
         setIsSubmitting(false);
         updateSnackBarMessage(data.error.message);
