@@ -4,7 +4,6 @@ This is a little description about your project.
 
 **Tech Stack:** MongoDB, Express.js, React.js, Node.js, Typescript
 
-**Contributors**: [Gurkiran Singh](https://github.com/g4rry420), [Joel Mackenz](https://github.com/joelmackenz)
 
 ---
 
