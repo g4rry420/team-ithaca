@@ -28,8 +28,11 @@ const useStyles = makeStyles((theme) => ({
 export default function Spinner(): JSX.Element {
   const classes = useStyles();
   return (
-    <div className={classes.spinnerOverlay}>
-      <div className={classes.spinnerContainer}></div>
-    </div>
+    <>
+      <div className={classes.spinnerOverlay}>
+        <div className={classes.spinnerContainer}></div>
+      </div>
+      <p>The backend is hosted in Glitch.So, it might take a minute to load. Please, wait. Thank You</p>
+    </>
   );
 }
