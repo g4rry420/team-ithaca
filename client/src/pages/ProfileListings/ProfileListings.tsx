@@ -67,6 +67,7 @@ export default function ProfileListings({ location }: RouteComponentProps): JSX.
 
   const initializeProfiles = () => {
     getProfiles().then((data) => {
+      console.log('DATA IN GET PROFILES ', data);
       const users = data.allUsers;
       if (users?.length) {
         setDisplayedProfiles(users.slice(0, 6));
