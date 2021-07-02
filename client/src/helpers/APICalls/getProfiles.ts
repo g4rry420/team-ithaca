@@ -10,7 +10,7 @@ const getProfiles = async (): Promise<ProfilesApiData> => {
   return await fetch(`${API}/profile`, fetchOptions)
     .then((res) => res.json())
     .catch(() => ({
-      error: { message: 'Unable to connect to server. Please try again' },
+      error: 'Unable to connect to server. Please try again',
     }));
 };
 
