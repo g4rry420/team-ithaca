@@ -34,11 +34,11 @@ export const SocketProvider: FunctionComponent = ({ children }): JSX.Element => 
     };
   }, [initSocket, loggedInUser]);
 
-  useEffect(() => {
-    if (loggedInUser?._id === undefined || socket === undefined) return;
+  // useEffect(() => {
+  //   if (loggedInUser?._id === undefined || socket === undefined) return;
 
-    socket.emit('comes-online', loggedInUser._id);
-  }, [loggedInUser, socket]);
+  //   socket.emit('comes-online', loggedInUser._id);
+  // }, [loggedInUser, socket]);
 
   return <SocketContext.Provider value={{ socket }}>{children}</SocketContext.Provider>;
 };

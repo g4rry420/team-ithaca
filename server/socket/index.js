@@ -16,6 +16,7 @@ exports.appSocket = (server) => {
   io.use(socketCookieParser());
 
   // user authentication
+  let loggedInUserId;
   io.use((socket, next) => {
     const token = socket.request.cookies['token'];
     if (token === null || !token) {
@@ -24,6 +25,7 @@ exports.appSocket = (server) => {
     } else {
         try {
             const accessToken = jwt.verify(token, process.env.JWT_SECRET);
+            loggedInUserId = accessToken.id;
             return next();
         } catch (error) {
             // tokens can be expired or invalid.
@@ -43,16 +45,19 @@ exports.appSocket = (server) => {
   });
 
   io.on("connection", socket => {
-    console.log('Socket connected socketId=>', socket.id, 'time=>', new Date().toLocaleString());
+    console.log('Socket connected socketId=>', socket.id, 'loggedInUserId=>', loggedInUserId, 'time=>', new Date().toLocaleString());
 
     // when a user comes online
-    socket.on("comes-online", id => {
-      if (!onlineUsers[id]) {
-        onlineUsers[id] = socket.id;
-      };
-      // send the user who just went online to everyone else who is already online
-      socket.broadcast.emit("add-online-user", id);
-    });
+    // socket.on("comes-online", id => {
+    //   if (!onlineUsers[id]) {
+    //     onlineUsers[id] = socket.id;
+    //   };
+    //   // send the user who just went online to everyone else who is already online
+    //   socket.broadcast.emit("add-online-user", id);
+    // });
+
+    onlineUsers[loggedInUserId] = socket.id;
+    socket.broadcast.emit("add-online-user", loggedInUserId);
 
     socket.on("new-convo", (data) => {
       const { recipientUserId, ...otherValues } = data;
@@ -64,7 +69,8 @@ exports.appSocket = (server) => {
     socket.on("new-message", (data) => {
       // retrieve socket id of recipient user
       const recipientSocketId = onlineUsers[data.recipientUserId];
-      socket.to(recipientSocketId).emit("new-message", {
+
+      socket.to(recipientSocketId).emit("latest-message", {
         message: data.message,
         activeConversation: data.activeConversation,
       })

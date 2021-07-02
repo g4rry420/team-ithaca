@@ -85,6 +85,7 @@ const Input: FC<Props> = (props) => {
     };
     activeConversation: string;
   }) => {
+    console.log('NEW MESSAGE ', data);
     dispatchMessages({ type: 'ADD_NEW_MESSAGE', activeConversation: data.activeConversation, message: data.message });
     dispatchConversations({
       type: 'UPDATE_LATEST_MESSAGE',
@@ -97,10 +98,10 @@ const Input: FC<Props> = (props) => {
   useEffect(() => {
     if (socket === undefined || currentUserId === '') return;
 
-    socket.on('new-message', dispatchNewMessage);
+    socket.on('latest-message', dispatchNewMessage);
 
     return () => {
-      socket.off('new-message', dispatchNewMessage);
+      socket.off('latest-message', dispatchNewMessage);
     };
   }, [socket, currentUserId]);
 
