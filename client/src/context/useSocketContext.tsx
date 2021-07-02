@@ -2,6 +2,7 @@ import { useState, useContext, createContext, FunctionComponent, useCallback, us
 import { io, Socket } from 'socket.io-client';
 
 import { useAuth } from '../context/useAuthContext';
+import API from '../API';
 
 interface ISocketContext {
   socket: Socket | undefined;
@@ -18,7 +19,7 @@ export const SocketProvider: FunctionComponent = ({ children }): JSX.Element => 
   const initSocket = useCallback(() => {
     console.log('trying to connect');
     setSocket(
-      io('/', {
+      io(API, {
         withCredentials: true,
       }),
     );
