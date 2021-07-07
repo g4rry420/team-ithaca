@@ -27,6 +27,9 @@ export default function Register({ location }: RouteComponentProps): JSX.Element
     { firstName, lastName, email, password }: { firstName: string; lastName: string; password: string; email: string },
     { setSubmitting }: FormikHelpers<{ email: string; password: string; firstName: string; lastName: string }>,
   ) => {
+    updateSnackBarMessage(
+      'The backend is hosted in Glitch.So, it might take a minute to load. Please, wait. Thank You',
+    );
     register(firstName, lastName, email, password, userState.isDogSitter).then((data) => {
       if (data.error) {
         console.error({ error: data.error });

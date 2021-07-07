@@ -31,6 +31,9 @@ export default function Login({ location }: RouteComponentProps): JSX.Element {
     { email, password }: { email: string; password: string },
     { setSubmitting }: FormikHelpers<{ email: string; password: string }>,
   ) => {
+    updateSnackBarMessage(
+      'The backend is hosted in Glitch.So, it might take a minute to load. Please, wait. Thank You',
+    );
     login(email, password).then((data) => {
       console.log(data);
       if (data.error) {

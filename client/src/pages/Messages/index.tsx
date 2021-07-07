@@ -51,7 +51,6 @@ export default function Messages(): JSX.Element {
       } else if (data.success) {
         setIsFetching(false);
         dispatchConversations({ type: 'UPDATE_CONVOS', conversations: data.conversations });
-        handleActiveConversation(data.conversations[0].conversationId);
       } else {
         setIsFetching(false);
       }

@@ -19,6 +19,9 @@ const DemoUser: FC<Props> = ({ submit }) => {
     setIsSubmitting(true);
     const email = 'test@user.com';
     const password = 'test1234';
+    updateSnackBarMessage(
+      'The backend is hosted in Glitch.So, it might take a minute to load. Please, wait. Thank You',
+    );
     login(email, password).then((data) => {
       if (data.error) {
         setIsSubmitting(false);
